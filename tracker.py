@@ -81,6 +81,17 @@ def get_domain_name_by_ip(address: str) -> str:
         return domain_name
 
 
+def get_ip_by_domain_name(domain_name: str) -> str:
+    try:
+        ip = socket.gethostbyname(domain_name)
+    except socket.herror:
+        return ''
+    except socket.gaierror:
+        raise ValueError(f"Non-existent domain name: {domain_name}")
+    else:
+        return ip
+
+
 def main():
     parser = argparse.ArgumentParser("AS-Tracker")
     parser.add_argument('host',
